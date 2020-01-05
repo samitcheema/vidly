@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
-import { render } from "@testing-library/react";
+import Favorite from "./common/favorite";
 
 class Movie extends Component {
   state = {
@@ -10,6 +10,14 @@ class Movie extends Component {
   handleDecrement = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
     this.setState({ movies: movies });
+  };
+  h;
+  handleFavorite = movie => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movies[index] };
+    movies[index].favorited = !movies[index].favorited;
+    this.setState({ movies });
   };
 
   render() {
@@ -35,6 +43,12 @@ class Movie extends Component {
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Favorite
+                    favorited={movie.favorited}
+                    onClick={() => this.handleFavorite(movie)}
+                  />
+                </td>
                 <td>
                   <button
                     onClick={() => this.handleDecrement(movie)}
