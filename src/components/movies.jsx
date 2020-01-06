@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Favorite from "./common/favorite";
+import Pagination from "./common/pagination";
 
 class Movie extends Component {
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    pageSize: 4
   };
 
   handleDecrement = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
     this.setState({ movies: movies });
   };
-  h;
+  handlePageChange = page => {
+    console.log(page);
+  };
   handleFavorite = movie => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
@@ -62,6 +66,11 @@ class Movie extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemsCount={count}
+          pageSize={this.state.pageSize}
+          onPageChange={this.handlePageChange}
+        />
       </React.Fragment>
     );
   }
