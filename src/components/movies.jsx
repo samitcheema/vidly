@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-import Favorite from "./common/favorite";
 import Genres from "./common/genres";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
+import MoviesTable from "./moiveTable";
 
 class Movie extends Component {
   state = {
@@ -65,41 +65,11 @@ class Movie extends Component {
         </div>
         <div className="col">
           <p>{filtered.length} movies in the database.</p>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Stock</th>
-                <th>Rental Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {movies.map(movie => (
-                <tr key={movie._id}>
-                  <td>{movie.title}</td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.numberInStock}</td>
-                  <td>{movie.dailyRentalRate}</td>
-                  <td>
-                    <Favorite
-                      favorited={movie.favorited}
-                      onClick={() => this.handleFavorite(movie)}
-                    />
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => this.handleDecrement(movie)}
-                      type="button"
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <MoviesTable
+            movies={movies}
+            onLike={this.handleFavorite}
+            onDelete={this.handleDecrement}
+          />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}
