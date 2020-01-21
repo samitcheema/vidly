@@ -1,14 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
+import Joi from "joi-browser";
+import Form from "./common/form";
 
-const MovieForm = ({ match, history }) => {
-  return (
-    <div>
-      <h1>Movie Form{match.params.id} </h1>
-      <button className="btn-primary" onClick={() => history.push("/movies")}>
-        Save
-      </button>
-    </div>
-  );
-};
+class MovieForm extends Component {
+  state = {
+    data: {
+      title: "",
+      genre: "",
+      Stock: "",
+      Rate: ""
+    },
+    errors: {}
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Movie Form{match.params.id} </h1>
+        <button className="btn-primary" onClick={() => history.push("/movies")}>
+          Save
+        </button>
+      </div>
+    );
+  }
+}
 
 export default MovieForm;
