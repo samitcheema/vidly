@@ -1,6 +1,7 @@
 import http from "./httpServices";
+import { apiUrl } from "../config.json";
 
-const apiEndpoint = "http://localhost:3900/api/movies";
+const apiEndpoint = apiUrl + "/movies";
 
 function movieUrl(id) {
   return `${apiEndpoint}/${id}`;
