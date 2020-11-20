@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Overview
+
+A video rental web application developed using strictly React and Bootstrap. 
 
 ## Available Scripts
 
